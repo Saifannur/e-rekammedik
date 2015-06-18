@@ -60,7 +60,8 @@
         android:id="@+id/btn_login"
         android:layout_below="@+id/linearLayout3"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="doLogin" />
 
     <Button
         android:layout_width="wrap_content"
@@ -70,5 +71,15 @@
         android:layout_below="@+id/linearLayout2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/linearLayout3"
+        android:layout_toEndOf="@+id/linearLayout3"
+        android:layout_marginLeft="104dp"
+        android:layout_marginStart="104dp" />
 
 </RelativeLayout>

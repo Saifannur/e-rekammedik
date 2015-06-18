@@ -1,13 +1,20 @@
 package id.ac.unsyiah.elektro.mobile.rekammedik;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class LoginActivity extends Activity {
+
+    private String email;
+    private String password;
+
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +27,15 @@ public class LoginActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
+    }
+    public void doLogin(){
+        if(email.contains("@"))
+        {
+
+        }
+        else {
+
+        }
     }
 
     @Override
@@ -35,5 +51,13 @@ public class LoginActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void setupVariable() throws Exception{
+        EditText editemail = (EditText) findViewById(R.id.edit_email);
+        EditText editpassword = (EditText) findViewById(R.id.edit_password);
+        // Hash for given password
+        password = editpassword.getText().toString();
+        password = MD5Digest.doHash(password);
+
     }
 }
