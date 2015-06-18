@@ -2,14 +2,18 @@ package id.ac.unsyiah.elektro.mobile.rekammedik;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 
 public class LoginActivity extends Activity {
+
+    public static final String MESSAGE = "id.ac.unsyiah.elektro.mobile";
 
     private String email;
     private String password;
@@ -28,13 +32,27 @@ public class LoginActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
-    public void doLogin(){
+    public void doLogin(View view){
+        String error;
         if(email.contains("@"))
         {
 
+            //DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
+            // periksa apakah email ada di datastore
+            // periksa apakah password sesuai dengan yang tersimpan di datastore
+            if (password.equals("passworddidatastore")){
+                Intent intent = new Intent();
+                intent.putExtra(MESSAGE, "Login berhasil!");
+            }else{
+                error = "Password tidak valid!";
+                Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+                return;
+            }
         }
         else {
-
+            error = "Email tidak valid!";
+            Toast.makeText(context, error, Toast.LENGTH_LONG).show();
+            return;
         }
     }
 
@@ -59,5 +77,9 @@ public class LoginActivity extends Activity {
         password = editpassword.getText().toString();
         password = MD5Digest.doHash(password);
 
+    }
+    public void doDaftar(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(MESSAGE, "Silahkan lakukan pendaftaran!");
     }
 }

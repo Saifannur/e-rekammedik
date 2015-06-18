@@ -70,7 +70,8 @@
         android:id="@+id/btn_daftar"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="doDaftar" />
 
     <Spinner
         android:layout_width="wrap_content"

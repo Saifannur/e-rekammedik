@@ -1,6 +1,7 @@
 package id.ac.unsyiah.elektro.mobile.rekammedik;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Pair;
@@ -14,7 +15,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Iwansyah Putra!"));
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(LoginActivity.MESSAGE);
+
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, message));
     }
 
     @Override
