@@ -1,29 +1,32 @@
 package id.ac.unsyiah.elektro.mobile.rekammedik;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 
-public class berhasilRegistrasi extends ActionBarActivity {
+public class BerhasilRegistrasiActivity extends Activity {
 
+    String nama,role;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_berhasil_registrasi);
 
         Intent hasilIntent = getIntent();
-        String hasil = hasilIntent.getStringExtra("berhasilRegistrasi");
+        nama = hasilIntent.getStringExtra(RegistrasiActivity.NAME);
+        role = hasilIntent.getStringExtra(RegistrasiActivity.ROLE);
 
         TextView hasilPeriksaNama = (TextView) findViewById(R.id.txt_namaPasien);
-        hasilPeriksaNama.setText(hasil);
+        hasilPeriksaNama.setText(nama);
 
         TextView hasilPeriksaStatus = (TextView) findViewById(R.id.txt_status);
-        hasilPeriksaStatus.setText(hasil);
+        hasilPeriksaStatus.setText(role);
     }
 
     @Override

@@ -36,7 +36,6 @@ public class LoginActivity extends Activity {
     }
     public void doLogin(View view){
 
-        String error;
         Intent intent = new Intent(this, HomeKlinikActivity.class);
         intent.putExtra(MESSAGE, "Login berhasil!");
         startActivity(intent);
@@ -78,6 +77,7 @@ public class LoginActivity extends Activity {
     }
     public void doDaftar(View view){
         Intent intent = new Intent(this, RegistrasiActivity.class);
+        intent.putExtra(MESSAGE, "daftar");
         startActivity(intent);
     }
     private class LoginAsyncTask extends AsyncTask<Void, Void, String>{

@@ -20,7 +20,7 @@ public class HomeKlinikActivity extends ActionBarActivity {
         Intent intent = getIntent();
         String pesan = intent.getStringExtra(LoginActivity.MESSAGE);
 
-        Toast.makeText(this, pesan.toString(), Toast.LENGTH_LONG);
+        Toast.makeText(this, pesan.toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override

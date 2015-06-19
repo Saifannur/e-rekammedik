@@ -20,33 +20,39 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class RegistrasiActivity extends Activity implements AdapterView.OnItemSelectedListener {
+
+public class RegistrasiActivity extends Activity implements AdapterView.OnItemSelectedListener{
 
     public static final String NAME = "id.ac.unsyiah.mobile.elektro.rekammedik";
     public static final String ROLE = "id.ac.unsyiah.mobile.elektro.rekammedik";
 
     Context context;
-    Spinner  spinner= (Spinner) findViewById(R.id.spinner);
+    Spinner  spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_registrasi);
 
-        ArrayAdapter adapter=ArrayAdapter.createFromResource(this,R.array.status,android.R.layout.simple_spinner_item);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        populateSpinner();
+    }
+    private void populateSpinner(){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.status,android.R.layout.simple_spinner_item);
+        int spinner_dd_item = android.R.layout.simple_spinner_dropdown_item;
+        adapter.setDropDownViewResource(spinner_dd_item);
+
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
-
-        setContentView(R.layout.activity_registrasi);
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_registrasi, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -61,11 +67,10 @@ public class RegistrasiActivity extends Activity implements AdapterView.OnItemSe
 
         return super.onOptionsItemSelected(item);
     }
-
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        TextView mytext=(TextView)view;
-        Toast.makeText(this,"Anda masuk sebagai "+mytext.getText(),Toast.LENGTH_SHORT).show();
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //TextView mytext=(TextView)view;
+        //Toast.makeText(this,"Anda masuk sebagai "+mytext.getText(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -73,40 +78,48 @@ public class RegistrasiActivity extends Activity implements AdapterView.OnItemSe
 
     }
 
-    public void doRegister(View view)throws Exception{
+    public void doRegister(View view){
+
         String nama, email, tgllahir, pass, confpass, role;
 
         EditText editnama = (EditText) findViewById(R.id.edit_nama);
-        EditText editemail = (EditText) findViewById(R.id.edit_email);
+        EditText editemail = (EditText) findViewById(R.id.edit_Email);
         EditText edittanggallahir = (EditText) findViewById(R.id.edit_TglLahir);
         EditText editpass = (EditText) findViewById(R.id.edit_pass);
         EditText editconfpass = (EditText) findViewById(R.id.edit_confPass);
 
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+
         nama = editnama.getText().toString();
         email = editemail.getText().toString();
-        tgllahir = edittanggallahir.getText().toString();
         pass = editpass.getText().toString();
-        try{
-            pass = MD5Digest.doHash(pass);
-        }catch (Exception ex){
-            Toast.makeText(context, "Password tidak valid", Toast.LENGTH_LONG);
-        }
-        role = spinner.getSelectedItem().toString();
+
+        Logger.getLogger("Passwordnya").log(Level.INFO, pass);
+
         confpass = editconfpass.getText().toString();
-        if (email.contains("@")){
-            if(pass.equals(confpass)){
-                /**
-                Intent intent = new Intent(this, )
-                intent.putExtra(NAME, nama);
-                intent.putExtra(ROLE, role);
-                 startActivity(intent);
-                 */
+        tgllahir = edittanggallahir.getText().toString();
+        if(nama.length() != 0){
+            try{
+                pass = MD5Digest.doHash(pass);
+                confpass = MD5Digest.doHash(confpass);
+            }catch (Exception ex){
+                Toast.makeText(context, "Password tidak valid", Toast.LENGTH_LONG).show();
+            }
+            role = spinner.getSelectedItem().toString();
+            if (email.contains("@")){
+                if(pass.equals(confpass)){
+                    Intent intent = new Intent(this, BerhasilRegistrasiActivity.class);
+                    intent.putExtra(NAME, nama);
+                    intent.putExtra(ROLE, role);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(this, "Password tidak sama", Toast.LENGTH_LONG).show();
+                }
             }else{
-                Toast.makeText(this, "Password tidak sama", Toast.LENGTH_LONG);
+                Toast.makeText(this, "Email tidak valid", Toast.LENGTH_LONG).show();
             }
         }else{
-            Toast.makeText(this, "Email tidak valid", Toast.LENGTH_LONG);
+            Toast.makeText(this, "Masukan tidak boleh kosong!", Toast.LENGTH_LONG).show();
         }
-
     }
 }
