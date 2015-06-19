@@ -44,8 +44,5 @@ public class HomeKlinikActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
 
-
-
-
     }
 }
