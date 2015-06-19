@@ -1,6 +1,8 @@
 package id.ac.unsyiah.elektro.mobile.rekammedik;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Debug;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -19,37 +21,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class RegistrasiActivity extends Activity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
-    Spinner spinner;
-    Button Register;
-    EditText Nama, Email,TglLahir,Password,KonfPassword;
+public class RegistrasiActivity extends Activity implements AdapterView.OnItemSelectedListener {
+
+    public static final String NAME = "id.ac.unsyiah.mobile.elektro.rekammedik";
+    public static final String ROLE = "id.ac.unsyiah.mobile.elektro.rekammedik";
+
+    Context context;
+
+    Spinner  spinner= (Spinner) findViewById(R.id.spinner);
+    EditText editnama = (EditText) findViewById(R.id.edit_nama);
+    EditText editemail = (EditText) findViewById(R.id.edit_email);
+    EditText edittanggallahir = (EditText) findViewById(R.id.edit_TglLahir);
+    EditText editpass = (EditText) findViewById(R.id.edit_pass);
+    EditText editconfpass = (EditText) findViewById(R.id.edit_confPass);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registrasi);
 
-        spinner= (Spinner) findViewById(R.id.spinner);
         ArrayAdapter adapter=ArrayAdapter.createFromResource(this,R.array.status,android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        Nama = (EditText) findViewById(R.id.edit_nama);
-        Email = (EditText) findViewById(R.id.edit_Email);
-        TglLahir = (EditText) findViewById(R.id.edit_TglLahir);
-        Password = (EditText) findViewById(R.id.edit_pass);
-        KonfPassword = (EditText) findViewById(R.id.edit_confPass);
-
-        Register =(Button) findViewById(R.id.btn_registrasi);
-
-        Register.setOnClickListener(this);
-
-        if (Password.equals(KonfPassword)){
-            Toast.makeText(getApplicationContext(),"Pass Sesuai",Toast.LENGTH_SHORT).show();
-
-        }else{
-            Toast.makeText(getApplicationContext(),"Pass Harus Sesuai",Toast.LENGTH_LONG).show();
-        }
+        setContentView(R.layout.activity_registrasi);
     }
 
 
@@ -86,12 +80,32 @@ public class RegistrasiActivity extends Activity implements AdapterView.OnItemSe
 
     }
 
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()) {
-            case R.id.btn_registrasi:
-
-                break;
+    public void doRegister(View view)throws Exception{
+        String nama, email, tgllahir, pass, confpass, role;
+        nama = editnama.getText().toString();
+        email = editemail.getText().toString();
+        tgllahir = edittanggallahir.getText().toString();
+        pass = editpass.getText().toString();
+        try{
+            pass = MD5Digest.doHash(pass);
+        }catch (Exception ex){
+            Toast.makeText(context, "Password tidak valid", Toast.LENGTH_LONG);
+        }
+        role = spinner.getSelectedItem().toString();
+        confpass = editconfpass.getText().toString();
+        if (email.contains("@")){
+            if(pass.equals(confpass)){
+                /**
+                Intent intent = new Intent(this, )
+                intent.putExtra(NAME, nama);
+                intent.putExtra(ROLE, role);
+                 startActivity(intent);
+                 */
+            }else{
+                Toast.makeText(this, "Password tidak sama", Toast.LENGTH_LONG);
+            }
+        }else{
+            Toast.makeText(this, "Email tidak valid", Toast.LENGTH_LONG);
         }
 
     }
