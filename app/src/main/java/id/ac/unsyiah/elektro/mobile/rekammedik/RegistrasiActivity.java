@@ -1,5 +1,6 @@
 package id.ac.unsyiah.elektro.mobile.rekammedik;
 
+import android.app.Activity;
 import android.os.Debug;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Registrasi extends ActionBarActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class RegistrasiActivity extends Activity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     Spinner spinner;
     Button Register;
     EditText Nama, Email,TglLahir,Password,KonfPassword;
