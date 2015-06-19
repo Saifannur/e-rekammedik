@@ -1,5 +1,6 @@
 package id.ac.unsyiah.elektro.mobile.rekammedik;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -8,17 +9,18 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        new GcmRegistrationAsyncTask(this).execute();
+
         Intent intent = getIntent();
         String message = intent.getStringExtra(LoginActivity.MESSAGE);
 
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, message));
     }
 
     @Override
