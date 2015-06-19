@@ -9,4 +9,7 @@
         <item>Pasien</item>
         <item>Klinik</item>
     </array>
+    <string name="title_activity_berhasil_registrasi">berhasilRegistrasi</string>
+    <string name="title_activity_berhasil_pilih_dokter">BerhasilPilihDokter</string>
+    <string name="title_activity_pilih_dokter">PilihDokter</string>
 </resources>
