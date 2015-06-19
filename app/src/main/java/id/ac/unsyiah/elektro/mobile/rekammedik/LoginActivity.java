@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
-    public static final String MESSAGE = "id.ac.unsyiah.elektro.mobile";
+    public final static String MESSAGE = "id.ac.unsyiah.elektro.mobile";
 
     private String email;
     private String password;
@@ -71,19 +71,10 @@ public class LoginActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-    private void setupVariable() throws Exception{
-        EditText editemail = (EditText) findViewById(R.id.edit_email);
-        EditText editpassword = (EditText) findViewById(R.id.edit_password);
-        // Hash for given password
-        password = editpassword.getText().toString();
-        password = MD5Digest.doHash(password);
-
-    }
     public void doDaftar(View view){
-        //Intent intent = new Intent(this, MainActivity.class);
-        //intent.putExtra(MESSAGE, "Silahkan lakukan pendaftaran!");
+        Intent intent = new Intent(this, RegistrasiActivity.class);
+        startActivity(intent);
     }
-
     private class LoginAsyncTask extends AsyncTask<Void, Void, String>{
 
         public Context context;
@@ -100,6 +91,16 @@ public class LoginActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+        }
+
+        private void setupVariable() throws Exception{
+            EditText editemail = (EditText) findViewById(R.id.edit_email);
+            EditText editpassword = (EditText) findViewById(R.id.edit_password);
+
+            // Hash for given password
+            password = editpassword.getText().toString();
+            password = MD5Digest.doHash(password);
+
         }
     }
 }
