@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 public class LoginActivity extends Activity {
 
     public static final String MESSAGE = "id.ac.unsyiah.elektro.mobile";
@@ -24,6 +23,8 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        new GcmRegistrationAsyncTask(this).execute();
     }
 
     @Override
@@ -79,7 +80,7 @@ public class LoginActivity extends Activity {
 
     }
     public void doDaftar(View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(MESSAGE, "Silahkan lakukan pendaftaran!");
+        //Intent intent = new Intent(this, MainActivity.class);
+        //intent.putExtra(MESSAGE, "Silahkan lakukan pendaftaran!");
     }
 }
