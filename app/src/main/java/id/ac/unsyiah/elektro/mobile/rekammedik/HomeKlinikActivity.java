@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class HomeKlinikActivity extends ActionBarActivity {
@@ -15,6 +16,11 @@ public class HomeKlinikActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_klinik);
+
+        Intent intent = getIntent();
+        String pesan = intent.getStringExtra(LoginActivity.MESSAGE);
+
+        Toast.makeText(this, pesan.toString(), Toast.LENGTH_LONG);
     }
 
     @Override

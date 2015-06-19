@@ -37,15 +37,19 @@ public class LoginActivity extends Activity {
     public void doLogin(View view){
 
         String error;
-
+        Intent intent = new Intent(this, HomeKlinikActivity.class);
+        intent.putExtra(MESSAGE, "Login berhasil!");
+        startActivity(intent);
+/**
         if(email.contains("@"))
         {
 
             // periksa apakah email ada di datastore
             // periksa apakah password sesuai dengan yang tersimpan di datastore
             if (password.equals("passworddidatastore")){
-                Intent intent = new Intent();
+                Intent intent = new Intent(this, HomeKlinikActivity.class);
                 intent.putExtra(MESSAGE, "Login berhasil!");
+                startActivity(intent);
             }else{
                 error = "Password tidak valid!";
                 Toast.makeText(context, error, Toast.LENGTH_LONG).show();
@@ -55,6 +59,7 @@ public class LoginActivity extends Activity {
             error = "Email tidak valid!";
             Toast.makeText(context, error, Toast.LENGTH_LONG).show();
         }
+ */
     }
 
     @Override

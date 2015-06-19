@@ -27,14 +27,7 @@ public class RegistrasiActivity extends Activity implements AdapterView.OnItemSe
     public static final String ROLE = "id.ac.unsyiah.mobile.elektro.rekammedik";
 
     Context context;
-
     Spinner  spinner= (Spinner) findViewById(R.id.spinner);
-    EditText editnama = (EditText) findViewById(R.id.edit_nama);
-    EditText editemail = (EditText) findViewById(R.id.edit_email);
-    EditText edittanggallahir = (EditText) findViewById(R.id.edit_TglLahir);
-    EditText editpass = (EditText) findViewById(R.id.edit_pass);
-    EditText editconfpass = (EditText) findViewById(R.id.edit_confPass);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +75,13 @@ public class RegistrasiActivity extends Activity implements AdapterView.OnItemSe
 
     public void doRegister(View view)throws Exception{
         String nama, email, tgllahir, pass, confpass, role;
+
+        EditText editnama = (EditText) findViewById(R.id.edit_nama);
+        EditText editemail = (EditText) findViewById(R.id.edit_email);
+        EditText edittanggallahir = (EditText) findViewById(R.id.edit_TglLahir);
+        EditText editpass = (EditText) findViewById(R.id.edit_pass);
+        EditText editconfpass = (EditText) findViewById(R.id.edit_confPass);
+
         nama = editnama.getText().toString();
         email = editemail.getText().toString();
         tgllahir = edittanggallahir.getText().toString();
