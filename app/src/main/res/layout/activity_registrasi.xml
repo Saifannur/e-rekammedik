@@ -6,7 +6,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="id.ac.unsyiah.elektro.mobile.rekammedik.Registrasi">
     
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
@@ -15,7 +15,7 @@
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-
+-->
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
         android:layout_alignEnd="@+id/textView2" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edit_nama"
         android:layout_alignBottom="@+id/textView3"
@@ -176,6 +176,6 @@
         android:layout_alignRight="@+id/btn_registrasi"
         android:layout_alignEnd="@+id/btn_registrasi" />
 
-        </LinearLayout>
-    </ScrollView>
+    <!--    </LinearLayout>
+    </ScrollView>-->
 </RelativeLayout>
