@@ -1,19 +1,28 @@
 package id.ac.unsyiah.elektro.mobile.rekammedik;
 
+import android.os.Debug;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Registrasi extends ActionBarActivity implements AdapterView.OnItemSelectedListener{
+public class Registrasi extends ActionBarActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     Spinner spinner;
+    Button Register;
+    EditText Nama, Email,TglLahir,Password,KonfPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +32,25 @@ public class Registrasi extends ActionBarActivity implements AdapterView.OnItemS
         ArrayAdapter adapter=ArrayAdapter.createFromResource(this,R.array.status,android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        Nama = (EditText) findViewById(R.id.edit_nama);
+        Email = (EditText) findViewById(R.id.edit_Email);
+        TglLahir = (EditText) findViewById(R.id.edit_TglLahir);
+        Password = (EditText) findViewById(R.id.edit_pass);
+        KonfPassword = (EditText) findViewById(R.id.edit_confPass);
+
+        Register =(Button) findViewById(R.id.btn_registrasi);
+
+        Register.setOnClickListener(this);
+
+        if (Password.equals(KonfPassword)){
+            Toast.makeText(getApplicationContext(),"Pass Sesuai",Toast.LENGTH_SHORT).show();
+
+        }else{
+            Toast.makeText(getApplicationContext(),"Pass Harus Sesuai",Toast.LENGTH_LONG).show();
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,7 +77,7 @@ public class Registrasi extends ActionBarActivity implements AdapterView.OnItemS
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         TextView mytext=(TextView)view;
-        Toast.makeText(this,"Silahkan pilih status anda"+mytext.getText(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Anda masuk sebagai "+mytext.getText(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -58,4 +85,13 @@ public class Registrasi extends ActionBarActivity implements AdapterView.OnItemS
 
     }
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.btn_registrasi:
+
+                break;
+        }
+
+    }
 }
