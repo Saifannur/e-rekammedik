@@ -28,60 +28,50 @@ import static com.example.xhaa.myapplication.backend.OfyService.ofy;
  * authentication! If this app is deployed, anyone can access this endpoint! If
  * you'd like to add authentication, take a look at the documentation.
  */
-@Api(name = "registration",
+@Api(name = "user",
         version = "v1",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.myapplication.xhaa.example.com",
                 ownerName = "backend.myapplication.xhaa.example.com",
                 packagePath = ""))
 
-public class RegistrationEndpoint {
+public class UserEndpoint {
 
-    private static final Logger log = Logger.getLogger(RegistrationEndpoint.class.getName());
+    private static final Logger log = Logger.getLogger(UserEndpoint.class.getName());
 
-    /**
-     * Register a device to the backend
-     *
-     * @param regId The Google Cloud Messaging registration Id to add
-     */
     @ApiMethod(name = "register")
-    public void registerDevice(@Named("regId") String regId) {
-        if (findRecord(regId) != null) {
-            log.info("Device " + regId + " already registered, skipping register");
+    public void registerUser(@Named("userId") String userId,
+                             @Named("username") String username,
+                             @Named("email") String email,
+                             @Named("tgllahir") String tgllahir,
+                             @Named("role") String role,
+                             @Named("pass") String pass
+                             ) {
+        if (findRecord(userId) != null) {
+            log.info("Device " + userId + " already registered, skipping register");
             return;
         }
-        RegistrationRecord record = new RegistrationRecord();
-        record.setRegId(regId);
+        UserRecord record = new UserRecord();
+        record.setUserId(userId);
+        record.setUsername(username);
+        record.setEmail(email);
+        record.setTgllahir(tgllahir);
+        record.setPass(pass);
+        record.setRole(role);
         ofy().save().entity(record).now();
     }
-
-    /**
-     * Unregister a device from the backend
-     *
-     * @param regId The Google Cloud Messaging registration Id to remove
-     */
-    @ApiMethod(name = "unregister")
-    public void unregisterDevice(@Named("regId") String regId) {
-        RegistrationRecord record = findRecord(regId);
-        if (record == null) {
-            log.info("Device " + regId + " not registered, skipping unregister");
-            return;
-        }
-        ofy().delete().entity(record).now();
-    }
-
     /**
      * Return a collection of registered devices
      *
      * @param count The number of devices to list
      * @return a list of Google Cloud Messaging registration Ids
      */
-    @ApiMethod(name = "listDevices")
-    public CollectionResponse<RegistrationRecord> listDevices(@Named("count") int count) {
+    @ApiMethod(name = "listUsers")
+    public CollectionResponse<RegistrationRecord> listUsers(@Named("count") int count) {
         List<RegistrationRecord> records = ofy().load().type(RegistrationRecord.class).limit(count).list();
         return CollectionResponse.<RegistrationRecord>builder().setItems(records).build();
     }
-
+    // filter record via regId
     private RegistrationRecord findRecord(String regId) {
         return ofy().load().type(RegistrationRecord.class).filter("regId", regId).first().now();
     }
