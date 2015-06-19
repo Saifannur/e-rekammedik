@@ -3,6 +3,7 @@ package id.ac.unsyiah.elektro.mobile.rekammedik;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,11 +35,12 @@ public class LoginActivity extends Activity {
         return true;
     }
     public void doLogin(View view){
+
         String error;
+
         if(email.contains("@"))
         {
 
-            //DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
             // periksa apakah email ada di datastore
             // periksa apakah password sesuai dengan yang tersimpan di datastore
             if (password.equals("passworddidatastore")){
@@ -47,13 +49,11 @@ public class LoginActivity extends Activity {
             }else{
                 error = "Password tidak valid!";
                 Toast.makeText(context, error, Toast.LENGTH_LONG).show();
-                return;
             }
         }
         else {
             error = "Email tidak valid!";
             Toast.makeText(context, error, Toast.LENGTH_LONG).show();
-            return;
         }
     }
 
@@ -82,5 +82,24 @@ public class LoginActivity extends Activity {
     public void doDaftar(View view){
         //Intent intent = new Intent(this, MainActivity.class);
         //intent.putExtra(MESSAGE, "Silahkan lakukan pendaftaran!");
+    }
+
+    private class LoginAsyncTask extends AsyncTask<Void, Void, String>{
+
+        public Context context;
+
+        public LoginAsyncTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
     }
 }

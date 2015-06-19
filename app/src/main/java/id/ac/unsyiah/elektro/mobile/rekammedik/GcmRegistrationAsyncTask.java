@@ -2,6 +2,7 @@
 
     import android.content.Context;
     import android.os.AsyncTask;
+    import android.text.style.EasyEditSpan;
     import android.widget.Toast;
 
     import com.example.xhaa.myapplication.backend.registration.Registration;
@@ -51,7 +52,7 @@
                 regService = builder.build();
             }
 
-            String msg ="";
+            String msg = "msg";
             try {
                 if (gcm == null) {
                     gcm = GoogleCloudMessaging.getInstance(context);
