@@ -3,4 +3,10 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_registrasi">Registrasi</string>
+    <string-array name="status">
+        <item>Dokter</item>
+        <item>Pasien</item>
+        <item>Klinik</item>
+    </string-array>
 </resources>
